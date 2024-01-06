@@ -27,7 +27,3 @@ To install and run the app locally, follow these steps:
 2. Install the dependencies using `npm install`.
 3. Set up the MongoDB database.
 4. Start the development server using `npm run dev`.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE.txt).
