@@ -1,8 +1,13 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { inter } from "../../lib/fonts";
-import { generalStyles } from "../../lib/styles";
 import "../globals.css";
+import {
+  Topbar,
+  LeftSidebar,
+  Bottombar,
+  RightSidebar,
+} from "@/components/shared";
 
 export const metadata: Metadata = {
   title: {
@@ -21,18 +26,18 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}`}>
-          {/* <Topbar /> */}
+          <Topbar />
 
-          <main>
-            {/* <LeftSidebar /> */}
+          <main className="flex flex-row">
+            <LeftSidebar />
 
-            <section className={`${generalStyles.mainContainer}`}>
+            <section className="flex min-h-screen flex-1 flex-col items-center bg-dark-1 px-6 pb-10 pt-28 max-md:pb-32 sm:px-10">
               <div className="w-full max-w-4xl">{children}</div>
             </section>
 
-            {/* <RightSidebar /> */}
+            <RightSidebar />
           </main>
-          {/* <Bottombar /> */}
+          <Bottombar />
         </body>
       </html>
     </ClerkProvider>
