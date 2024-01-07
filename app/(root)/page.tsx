@@ -1,11 +1,9 @@
-import { UserButton } from "@clerk/nextjs";
-import { generalStyles } from "../../lib/styles";
+
 
 export default function Home() {
   return (
     <>
-      <UserButton afterSignOutUrl="/" />
-      <h1 className={`${generalStyles.headText} text-left`}>Home</h1>
+      <h1 className="text-heading2-bold text-light-1 text-left">Home</h1>
     </>
   );
 }

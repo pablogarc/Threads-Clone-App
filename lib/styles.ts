@@ -8,7 +8,7 @@ const generalStyles = {
     "sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between gap-12 overflow-auto border-l border-l-dark-4 bg-dark-2 px-10 pb-6 pt-28 max-xl:hidden",
   clerkResponsive: "max-sm:hidden",
   tab: "flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2",
-  noFocus: "",
+  noFocus: "focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0",
 };
 
 const cardStyles = {
@@ -37,6 +37,7 @@ const barStyles = {
   leftSideBar:
     "sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r border-r-dark-4 bg-dark-2 pb-5 pt-28 max-md:hidden",
   leftSideBarLink: "relative flex justify-start gap-4 rounded-lg p-4",
+  rightSideBar: "sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between gap-12 overflow-auto border-l border-l-dark-4 bg-dark-2 px-10 pb-6 pt-28 max-xl:hidden",
 };
 
 const formStyles = {
