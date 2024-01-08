@@ -3,6 +3,7 @@
 import * as z from "zod";
 import { useUploadThing } from "@/lib/uploadthing";
 import { ChangeEvent, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { User } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidationSchema } from "@/lib/validations/user";
@@ -18,7 +19,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage
 } from "@/components/ui/form";
+import { updateUser } from "@/lib/actions/user.actions";
 
 const AccountProfile = ({
   user,
@@ -29,6 +32,8 @@ const AccountProfile = ({
 }) => {
   const [files, setFiles] = useState<File[]>([]);
   const { startUpload } = useUploadThing("media");
+  const router = useRouter();
+  const pathname = usePathname();
 
   const form = useForm<z.infer<typeof UserValidationSchema>>({
     resolver: zodResolver(UserValidationSchema),
@@ -73,6 +78,21 @@ const AccountProfile = ({
         values.profile_photo = imgRes[0].url;
       }
     }
+
+    await updateUser({
+      userId: user.id,
+      username: values.username,
+      name: values.name,
+      bio: values.bio,
+      image: values.profile_photo,
+      path: pathname,
+    });
+
+    if ( pathname === "/profile/edit") {
+      router.back();
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -115,6 +135,7 @@ const AccountProfile = ({
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -135,6 +156,7 @@ const AccountProfile = ({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -155,6 +177,7 @@ const AccountProfile = ({
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -170,11 +193,12 @@ const AccountProfile = ({
               <FormControl>
                 <Textarea
                   rows={10}
-                  placeholder="play something"
+                  placeholder="Add something that describes you"
                   className="border border-dark-4 bg-dark-3 text-light-1 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
