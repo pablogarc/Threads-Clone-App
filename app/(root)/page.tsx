@@ -1,6 +1,8 @@
 import ThreadCard from "@/components/cards/ThreadCard";
+import { ThreadCardSkeleton } from "@/components/ui/skeletons";
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { currentUser } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 export default async function Home() {
   const result = await fetchPosts();
@@ -19,17 +21,21 @@ export default async function Home() {
           <>
             {result.posts.map((post) => {
               return (
-                <ThreadCard
+                <Suspense
                   key={post._id}
-                  id={post._id}
-                  currentUserId={user?.id || ""}
-                  parentId={post.parentId}
-                  content={post.text}
-                  author={post.author}
-                  community={post.community}
-                  createdAt={post.createdAt}
-                  comments={post.children}
-                />
+                  fallback={<ThreadCardSkeleton />}
+                >
+                  <ThreadCard
+                    id={post._id}
+                    currentUserId={user?.id || ""}
+                    parentId={post.parentId}
+                    content={post.text}
+                    author={post.author}
+                    community={post.community}
+                    createdAt={post.createdAt}
+                    comments={post.children}
+                  />
+                </Suspense>
               );
             })}
           </>
