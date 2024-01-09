@@ -27,7 +27,7 @@ export type ThreadCardProps = {
     author: {
       image: string;
     };
-  };
+  }[];
   isComment?: boolean;
 };
 
@@ -45,4 +45,26 @@ export type ParamsCreateThread = {
   author: string;
   communityId: string | null;
   path: string;
+};
+
+export type ParamsAddCommentToThread = {
+  threadId: string;
+  commentText: string;
+  userId: string;
+  path: string;
+};
+
+export type ProfileHeaderProps = {
+  accountId: string;
+  authUserId: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  bio: string;
+};
+
+export type ThreadsTabProps = {
+  accountId: string;
+  currentUserId: string;
+  accountType: string;
 };
