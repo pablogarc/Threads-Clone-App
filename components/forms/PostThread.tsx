@@ -16,10 +16,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { createThread } from "@/lib/actions/thread.actions";
+import { useOrganization } from "@clerk/nextjs";
 
 function PostThread({ userId }: { userId: string }) {
   const router = useRouter();
   const pathname = usePathname();
+  const { organization } = useOrganization();
 
   const form = useForm<z.infer<typeof ThreadValidationSchema>>({
     resolver: zodResolver(ThreadValidationSchema),
@@ -33,10 +35,10 @@ function PostThread({ userId }: { userId: string }) {
     await createThread({
       text: values.thread,
       author: values.accountId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
-    
+
     router.push("/");
   };
 
