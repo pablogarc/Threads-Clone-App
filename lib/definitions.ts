@@ -1,3 +1,5 @@
+import { SortOrder } from "mongoose";
+
 export type User = {
   id?: string;
   objectId?: string;
@@ -5,6 +7,41 @@ export type User = {
   name?: string;
   bio?: string;
   image?: string;
+};
+
+export type UserCardProps = {
+  id: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  personType: string;
+};
+
+export type ParamsFetchUsers = {
+  userId: string;
+  searchString?: string;
+  pageNumber?: number;
+  pageSize?: number;
+  sortBy?: SortOrder;
+};
+
+export type ParamsUpdateUser = {
+  userId?: string;
+  username: string;
+  name: string;
+  bio: string;
+  image: string;
+  path: string;
+};
+
+export type ProfileHeaderProps = {
+  accountId: string;
+  authUserId: string;
+  name: string;
+  username: string;
+  imgUrl: string;
+  bio: string;
+  type?: "User" | "Community";
 };
 
 export type ThreadCardProps = {
@@ -31,15 +68,6 @@ export type ThreadCardProps = {
   isComment?: boolean;
 };
 
-export type ParamsUpdateUser = {
-  userId?: string;
-  username: string;
-  name: string;
-  bio: string;
-  image: string;
-  path: string;
-};
-
 export type ParamsCreateThread = {
   text: string;
   author: string;
@@ -52,15 +80,6 @@ export type ParamsAddCommentToThread = {
   commentText: string;
   userId: string;
   path: string;
-};
-
-export type ProfileHeaderProps = {
-  accountId: string;
-  authUserId: string;
-  name: string;
-  username: string;
-  imgUrl: string;
-  bio: string;
 };
 
 export type ThreadsTabProps = {
